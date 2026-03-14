@@ -131,7 +131,7 @@ export default function GalleryScene() {
 
   return (
     <div
-      className={`relative h-screen w-screen overflow-hidden bg-[#ece7dc] ${
+      className={`relative h-screen w-screen overflow-hidden bg-[#ece8e0] ${
         hasEntered && !isOverlayOpen ? "cursor-none" : "cursor-default"
       }`}
     >
@@ -164,10 +164,10 @@ export default function GalleryScene() {
             toneMappingExposure: 1.0,
             outputColorSpace: THREE.SRGBColorSpace,
           }}
-          style={{ background: "#f0ede8" }}
+          style={{ background: "#ece8e0" }}
         >
-          <color attach="background" args={["#f0ede8"]} />
-          <fog attach="fog" args={["#f0ede8", 10, 50]} />
+          <color attach="background" args={["#ece8e0"]} />
+          <fog attach="fog" args={["#ece8e0", 10, 50]} />
 
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />

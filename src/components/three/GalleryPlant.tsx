@@ -20,12 +20,17 @@ export default function GalleryPlant({
       <group scale={scale}>
         <mesh position={[0, 0.2, 0]} castShadow receiveShadow>
           <cylinderGeometry args={[0.2, 0.15, 0.4, 6]} />
-          <meshStandardMaterial color="#d4cdc4" roughness={0.9} metalness={0} />
+          <meshStandardMaterial
+            color="#c4b8a8"
+            roughness={0.85}
+            metalness={0}
+            envMapIntensity={0.1}
+          />
         </mesh>
 
         <mesh position={[0, 0.4, 0]} castShadow receiveShadow>
           <cylinderGeometry args={[0.18, 0.18, 0.02, 6]} />
-          <meshStandardMaterial color="#3d3530" roughness={1} />
+          <meshStandardMaterial color="#4a3e34" roughness={1} metalness={0} />
         </mesh>
 
         <mesh position={[0, 0.75, 0]} castShadow receiveShadow>

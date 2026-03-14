@@ -45,12 +45,22 @@ export default function Pedestal({
 
       <mesh position={[0, 0.5, 0]} castShadow receiveShadow>
         <boxGeometry args={[0.5, 1, 0.5]} />
-        <meshStandardMaterial color="#f0ede8" roughness={0.85} metalness={0} />
+        <meshStandardMaterial
+          color="#f0ede6"
+          roughness={0.85}
+          metalness={0}
+          envMapIntensity={0.1}
+        />
       </mesh>
 
       <mesh position={[0, 1.02, 0]} castShadow receiveShadow>
         <boxGeometry args={[0.55, 0.04, 0.55]} />
-        <meshStandardMaterial color="#e8e5e0" roughness={0.8} metalness={0} />
+        <meshStandardMaterial
+          color="#b08d6a"
+          roughness={0.55}
+          metalness={0}
+          envMapIntensity={0.2}
+        />
       </mesh>
 
       <mesh ref={objectRef} position={[0, 1.15, 0]} castShadow receiveShadow>
@@ -67,7 +77,7 @@ export default function Pedestal({
         <Text
           position={[0, 0.15, 0.275]}
           fontSize={0.06}
-          color="#666660"
+          color="#6f685c"
           anchorX="center"
           anchorY="middle"
           maxWidth={0.38}
