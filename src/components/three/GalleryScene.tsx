@@ -161,13 +161,13 @@ export default function GalleryScene() {
             antialias: true,
             powerPreference: "high-performance",
             toneMapping: THREE.ACESFilmicToneMapping,
-            toneMappingExposure: 1.1,
+            toneMappingExposure: 1.0,
             outputColorSpace: THREE.SRGBColorSpace,
           }}
           style={{ background: "#f0ede8" }}
         >
           <color attach="background" args={["#f0ede8"]} />
-          <fog attach="fog" args={["#f0ede8", 12, 55]} />
+          <fog attach="fog" args={["#f0ede8", 10, 50]} />
 
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />
@@ -209,7 +209,7 @@ export default function GalleryScene() {
             <GalleryLighting />
             <ContactShadows
               position={[0, 0.01, 0]}
-              opacity={0.35}
+              opacity={0.3}
               scale={30}
               blur={2.5}
               far={4}

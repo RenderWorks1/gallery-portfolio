@@ -55,7 +55,7 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
                 color={isNearby ? "#2f2a24" : "#1a1a1a"}
                 roughness={0.82}
                 metalness={0.08}
-                emissive={isNearby ? "#6d5940" : "#000000"}
+                emissive={isNearby ? "#6d5940" : "#1a1511"}
                 emissiveIntensity={isNearby ? 0.18 : 0}
               />
             </mesh>
@@ -69,7 +69,7 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
               <boxGeometry args={[TITLE_PLAQUE_WIDTH, TITLE_PLAQUE_HEIGHT, 0.05]} />
               <meshStandardMaterial
                 color={isNearby ? "#f2e5d2" : "#eadbc5"}
-                emissive={isNearby ? "#806241" : "#000000"}
+                emissive={isNearby ? "#806241" : "#1a1511"}
                 emissiveIntensity={isNearby ? 0.18 : 0}
                 roughness={0.62}
                 metalness={0.04}
@@ -93,7 +93,7 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
           <group position={[markerX, markerY, markerZ]} scale={[0.68, 0.68, 0.68]}>
             <mesh rotation={[-Math.PI / 2, 0, 0]}>
               <ringGeometry args={[0.66, 0.70, 64]} />
-              <meshBasicMaterial color="#000000" />
+              <meshBasicMaterial color="#1a1511" />
             </mesh>
           </group>
         </group>
