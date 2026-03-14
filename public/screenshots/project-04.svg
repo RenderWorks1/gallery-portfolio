@@ -1,0 +1,11 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" rx="36" fill="#F0EBE2"/>
+  <rect x="56" y="48" width="1088" height="654" rx="28" fill="#FEFEFD" stroke="#DDD3C6" stroke-width="4"/>
+  <rect x="96" y="96" width="280" height="500" rx="24" fill="#171717"/>
+  <rect x="410" y="96" width="694" height="220" rx="24" fill="#F4EFE7"/>
+  <rect x="410" y="344" width="328" height="252" rx="24" fill="#E8DED0"/>
+  <rect x="776" y="344" width="328" height="252" rx="24" fill="#D9C8AF"/>
+  <text x="120" y="184" fill="#F7F3ED" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">THE ANSWER</text>
+  <text x="96" y="660" fill="#171717" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700">The Answer</text>
+  <text x="96" y="696" fill="#5B554D" font-family="Arial, Helvetica, sans-serif" font-size="24">Minimal studio site with restrained luxury cues</text>
+</svg>
