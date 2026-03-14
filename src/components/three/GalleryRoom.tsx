@@ -65,13 +65,6 @@ const wallMaterial = {
   envMapIntensity: 0.05,
 };
 
-const accentWallMaterial = {
-  color: "#2a2825",
-  roughness: 0.88,
-  metalness: 0,
-  envMapIntensity: 0.15,
-};
-
 const skirtingSpecs: SkirtingSpec[] = [
   { key: "skirting-left-wall", position: [-14.84, 0.05, 0], width: 50, rotation: [0, Math.PI / 2, 0] },
   { key: "skirting-right-wall", position: [14.84, 0.05, 0], width: 50, rotation: [0, Math.PI / 2, 0] },
@@ -145,7 +138,7 @@ export default function GalleryRoom() {
         <RigidBody key={wall.key} type="fixed">
           <mesh position={wall.position} castShadow receiveShadow>
             <boxGeometry args={wall.size} />
-            <meshStandardMaterial {...(wall.key === "back-wall" ? accentWallMaterial : wallMaterial)} />
+            <meshStandardMaterial {...wallMaterial} />
           </mesh>
         </RigidBody>
       ))}

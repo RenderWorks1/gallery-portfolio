@@ -28,10 +28,10 @@ export default function PartitionWall({
         <mesh castShadow receiveShadow>
           <boxGeometry args={[width, height, depth]} />
           <meshStandardMaterial
-            color="#edeae3"
-            roughness={0.93}
+            color="#f2efe8"
+            roughness={0.95}
             metalness={0}
-            envMapIntensity={0.08}
+            envMapIntensity={0.05}
           />
         </mesh>
 
