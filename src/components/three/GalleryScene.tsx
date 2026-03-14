@@ -32,8 +32,8 @@ const benchPlacements: Array<{
   position: [number, number, number];
   rotation: [number, number, number];
 }> = [
-  { position: [-8.8, 0, 13], rotation: [0, Math.PI / 2, 0] },
-  { position: [8.9, 0, -16], rotation: [0, -Math.PI / 2, 0] },
+  { position: [-4.8, 0, 5.4], rotation: [0, Math.PI / 2, 0] },
+  { position: [4.8, 0, -6.2], rotation: [0, -Math.PI / 2, 0] },
 ];
 
 const pedestalPlacements: Array<{
@@ -43,13 +43,13 @@ const pedestalPlacements: Array<{
   label: string;
 }> = [
   {
-    position: [-5.8, 0, 2.5],
+    position: [-2.8, 0, 1.6],
     objectType: "torusKnot",
     objectColor: "#1d9e75",
     label: "Three.js",
   },
   {
-    position: [6.8, 0, -15.5],
+    position: [3.6, 0, -4.9],
     objectType: "dodecahedron",
     objectColor: "#534ab7",
     label: "Next.js",
@@ -60,10 +60,10 @@ const plantPlacements: Array<{
   position: [number, number, number];
   scale: number;
 }> = [
-  { position: [-5.6, 0, 20.6], scale: 1 },
-  { position: [5.6, 0, 20.6], scale: 0.92 },
-  { position: [-12.6, 0, -20.4], scale: 1.12 },
-  { position: [12.3, 0, 12.5], scale: 0.88 },
+  { position: [-3.8, 0, 9.2], scale: 1 },
+  { position: [3.8, 0, 9.2], scale: 0.92 },
+  { position: [-6.9, 0, -9.4], scale: 1.12 },
+  { position: [6.8, 0, 4.7], scale: 0.88 },
 ];
 
 const keyboardMap = [
@@ -156,7 +156,7 @@ export default function GalleryScene() {
         <Canvas
           shadows
           dpr={[1, 2]}
-          camera={{ position: [0, 2.8, 12], fov: 45, near: 0.1, far: 100 }}
+          camera={{ position: [0, 2.7, 8.5], fov: 46, near: 0.1, far: 100 }}
           gl={{
             antialias: true,
             powerPreference: "high-performance",
@@ -167,7 +167,7 @@ export default function GalleryScene() {
           style={{ background: "#ece8e0" }}
         >
           <color attach="background" args={["#ece8e0"]} />
-          <fog attach="fog" args={["#ece8e0", 10, 50]} />
+          <fog attach="fog" args={["#ece8e0", 7, 34]} />
 
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />
@@ -195,7 +195,7 @@ export default function GalleryScene() {
                 <GalleryPlant key={`plant-${index}`} position={plant.position} scale={plant.scale} />
               ))}
               <WelcomeSign
-                position={[-4.8, 0, 18.4]}
+                position={[-2.8, 0, 8.3]}
                 rotation={[0, 0.28, 0]}
                 title="Luke's Portfolio"
                 subtitle="Web Development & Design"
@@ -210,7 +210,7 @@ export default function GalleryScene() {
             <ContactShadows
               position={[0, 0.01, 0]}
               opacity={0.3}
-              scale={30}
+              scale={20}
               blur={2.5}
               far={4}
               resolution={256}

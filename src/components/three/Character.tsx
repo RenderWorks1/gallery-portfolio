@@ -112,7 +112,7 @@ export default function Character({ controlsDisabled }: CharacterProps) {
       ref={controllerRef}
       name="player"
       animated
-      position={[0, 1.25, 18]}
+      position={[0, 1.25, 8.6]}
       mode="FixedCamera"
       capsuleHalfHeight={0.35}
       capsuleRadius={0.3}

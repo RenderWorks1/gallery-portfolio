@@ -7,19 +7,16 @@ import { artworkData, getArtworkLightPosition } from "@/components/three/Artwork
 import type { Project } from "@/data/projects";
 
 const pedestalLightPositions: [number, number, number][] = [
-  [-5.8, 3.5, 2.5],
-  [6.8, 3.5, -15.5],
+  [-2.8, 3.5, 1.6],
+  [3.6, 3.5, -4.9],
 ];
 
 const artworkShadowIds = new Set<string>([
   "render-works",
   "wrightson-construction",
   "church-scroll",
-  "answer-studio",
   "common-estate",
-  "lead-intelligence",
   "rocks-holloway",
-  "gallery-residency",
 ]);
 
 function ArtworkSpotlight({
