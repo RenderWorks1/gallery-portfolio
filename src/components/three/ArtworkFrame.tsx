@@ -52,11 +52,12 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
             <mesh castShadow receiveShadow position={[0, 0, -0.04]}>
               <boxGeometry args={[FRAME_WIDTH, FRAME_HEIGHT, 0.08]} />
               <meshStandardMaterial
-                color={isNearby ? "#2f2a24" : "#1a1a1a"}
-                roughness={0.82}
-                metalness={0.08}
-                emissive={isNearby ? "#6d5940" : "#1a1511"}
-                emissiveIntensity={isNearby ? 0.18 : 0}
+                color={isNearby ? "#1a1714" : "#0f0f0f"}
+                roughness={0.5}
+                metalness={0.3}
+                envMapIntensity={0.6}
+                emissive={isNearby ? "#3b2f21" : "#1a1511"}
+                emissiveIntensity={isNearby ? 0.12 : 0}
               />
             </mesh>
 
@@ -73,11 +74,12 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
             <mesh position={[0, TITLE_PLAQUE_Y, 0.03]} receiveShadow>
               <boxGeometry args={[TITLE_PLAQUE_WIDTH, TITLE_PLAQUE_HEIGHT, 0.05]} />
               <meshStandardMaterial
-                color={isNearby ? "#f2e5d2" : "#eadbc5"}
-                emissive={isNearby ? "#806241" : "#1a1511"}
-                emissiveIntensity={isNearby ? 0.18 : 0}
-                roughness={0.62}
-                metalness={0.04}
+                color={isNearby ? "#e6caa7" : "#d9bc99"}
+                emissive={isNearby ? "#5e4731" : "#1a1511"}
+                emissiveIntensity={isNearby ? 0.14 : 0}
+                roughness={0.55}
+                metalness={0}
+                envMapIntensity={0.2}
               />
             </mesh>
 
@@ -98,7 +100,12 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
           <group position={[markerX, markerY, markerZ]} scale={[0.68, 0.68, 0.68]}>
             <mesh rotation={[-Math.PI / 2, 0, 0]}>
               <ringGeometry args={[0.66, 0.70, 64]} />
-              <meshBasicMaterial color="#1a1511" />
+              <meshStandardMaterial
+                color="#1a1511"
+                roughness={0.5}
+                metalness={0.2}
+                envMapIntensity={0.35}
+              />
             </mesh>
           </group>
         </group>

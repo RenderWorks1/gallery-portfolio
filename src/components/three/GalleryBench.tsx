@@ -17,17 +17,32 @@ export default function GalleryBench({
       <group>
         <mesh position={[0, 0.42, 0]} castShadow receiveShadow>
           <boxGeometry args={[1.6, 0.08, 0.55]} />
-          <meshStandardMaterial color="#8a7a6b" roughness={0.72} metalness={0} />
+          <meshStandardMaterial
+            color="#9c7e5e"
+            roughness={0.65}
+            metalness={0}
+            envMapIntensity={0.3}
+          />
         </mesh>
 
         <mesh position={[-0.6, 0.19, 0]} castShadow receiveShadow>
           <boxGeometry args={[0.06, 0.38, 0.45]} />
-          <meshStandardMaterial color="#2a2a2a" roughness={0.34} metalness={0.58} />
+          <meshStandardMaterial
+            color="#1c1c1c"
+            roughness={0.2}
+            metalness={0.9}
+            envMapIntensity={1}
+          />
         </mesh>
 
         <mesh position={[0.6, 0.19, 0]} castShadow receiveShadow>
           <boxGeometry args={[0.06, 0.38, 0.45]} />
-          <meshStandardMaterial color="#2a2a2a" roughness={0.34} metalness={0.58} />
+          <meshStandardMaterial
+            color="#1c1c1c"
+            roughness={0.2}
+            metalness={0.9}
+            envMapIntensity={1}
+          />
         </mesh>
       </group>
     </RigidBody>

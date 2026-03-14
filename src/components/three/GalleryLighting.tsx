@@ -80,11 +80,21 @@ function TrackLight({
     <group position={[x, 3.92, z]} rotation={[0.32, fixtureRotationY, 0]}>
       <mesh castShadow receiveShadow>
         <boxGeometry args={[0.05, 0.05, 0.6]} />
-        <meshStandardMaterial color="#2a2a2a" roughness={0.3} metalness={0.8} />
+        <meshStandardMaterial
+          color="#1a1a1a"
+          roughness={0.15}
+          metalness={0.92}
+          envMapIntensity={1.5}
+        />
       </mesh>
       <mesh castShadow receiveShadow position={[0, -0.08, 0]}>
         <cylinderGeometry args={[0.04, 0.06, 0.12, 8]} />
-        <meshStandardMaterial color="#1a1a1a" roughness={0.2} metalness={0.9} />
+        <meshStandardMaterial
+          color="#1a1a1a"
+          roughness={0.15}
+          metalness={0.92}
+          envMapIntensity={1.5}
+        />
       </mesh>
       <mesh position={[0, -0.15, 0.04]}>
         <circleGeometry args={[0.03, 8]} />
@@ -128,8 +138,8 @@ function PedestalSpotlight({
 export default function GalleryLighting() {
   return (
     <>
-      <ambientLight intensity={0.18} color="#e8e4df" />
-      <Environment preset="studio" environmentIntensity={0.32} />
+      <ambientLight intensity={0.2} color="#e8dfd2" />
+      <Environment preset="studio" environmentIntensity={0.4} />
       {artworkData.map((artwork) => (
         <ArtworkSpotlight
           key={artwork.id}

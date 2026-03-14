@@ -22,23 +22,38 @@ export default function WelcomeSign({
       <group>
         <mesh position={[0, 1.2, 0]} castShadow receiveShadow>
           <boxGeometry args={[1.2, 0.8, 0.03]} />
-          <meshStandardMaterial color="#1a1a1a" roughness={0.4} metalness={0.3} />
+          <meshStandardMaterial
+            color="#1a1a1a"
+            roughness={0.4}
+            metalness={0.3}
+            envMapIntensity={0.5}
+          />
         </mesh>
 
         <mesh position={[0, 0.4, 0]} castShadow receiveShadow>
           <cylinderGeometry args={[0.02, 0.02, 0.8, 8]} />
-          <meshStandardMaterial color="#2a2a2a" roughness={0.3} metalness={0.7} />
+          <meshStandardMaterial
+            color="#1c1c1c"
+            roughness={0.25}
+            metalness={0.85}
+            envMapIntensity={1}
+          />
         </mesh>
 
         <mesh position={[0, 0.02, 0]} castShadow receiveShadow>
           <cylinderGeometry args={[0.2, 0.22, 0.04, 8]} />
-          <meshStandardMaterial color="#2a2a2a" roughness={0.3} metalness={0.7} />
+          <meshStandardMaterial
+            color="#1c1c1c"
+            roughness={0.25}
+            metalness={0.85}
+            envMapIntensity={1}
+          />
         </mesh>
 
         <Text
           position={[0, 1.3, 0.02]}
           fontSize={0.09}
-          color="#f5f2ed"
+          color="#f5f2ec"
           anchorX="center"
           anchorY="middle"
           maxWidth={1}
@@ -49,7 +64,7 @@ export default function WelcomeSign({
         <Text
           position={[0, 1.12, 0.02]}
           fontSize={0.05}
-          color="#a0a09a"
+          color="#b7ab9b"
           anchorX="center"
           anchorY="middle"
           maxWidth={1}
