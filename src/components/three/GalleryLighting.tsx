@@ -44,7 +44,7 @@ function ArtworkSpotlight({
       <spotLight
         ref={lightRef}
         position={position}
-        intensity={3}
+        intensity={3.6}
         angle={Math.PI / 7}
         penumbra={0.6}
         distance={10}
@@ -128,8 +128,8 @@ function PedestalSpotlight({
 export default function GalleryLighting() {
   return (
     <>
-      <ambientLight intensity={0.2} color="#e8e4df" />
-      <Environment preset="studio" environmentIntensity={0.4} />
+      <ambientLight intensity={0.18} color="#e8e4df" />
+      <Environment preset="studio" environmentIntensity={0.32} />
       {artworkData.map((artwork) => (
         <ArtworkSpotlight
           key={artwork.id}

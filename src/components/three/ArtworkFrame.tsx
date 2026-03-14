@@ -62,7 +62,12 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
 
             <mesh position={[0, 0, 0.01]}>
               <planeGeometry args={[ARTWORK_WIDTH, ARTWORK_HEIGHT]} />
-              <meshBasicMaterial map={configuredTexture} toneMapped={false} />
+              <meshStandardMaterial
+                map={configuredTexture}
+                roughness={0.72}
+                metalness={0.02}
+                envMapIntensity={0.35}
+              />
             </mesh>
 
             <mesh position={[0, TITLE_PLAQUE_Y, 0.03]} receiveShadow>
