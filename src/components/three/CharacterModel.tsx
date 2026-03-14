@@ -44,7 +44,11 @@ export default function CharacterModel() {
         }
 
         if ("emissive" in nextMaterial && nextMaterial.emissive instanceof THREE.Color) {
-          nextMaterial.emissive = new THREE.Color("#000000");
+          nextMaterial.emissive = new THREE.Color("#1a1511");
+        }
+
+        if ("emissiveIntensity" in nextMaterial && typeof nextMaterial.emissiveIntensity === "number") {
+          nextMaterial.emissiveIntensity = 0;
         }
 
         return nextMaterial;

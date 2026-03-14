@@ -71,9 +71,9 @@ export default function GalleryRoom() {
         <planeGeometry args={[30, 50]} />
         <meshStandardMaterial
           color="#f5f2ed"
-          roughness={0.98}
+          roughness={0.95}
           metalness={0}
-          envMapIntensity={0.08}
+          envMapIntensity={0}
           transparent
           opacity={0.92}
         />
@@ -127,7 +127,7 @@ export default function GalleryRoom() {
               rotation={[0, 0, Math.PI / 2]}
             >
               <cylinderGeometry args={[0.028, 0.028, segment.length, 20]} />
-              <meshStandardMaterial color="#111111" roughness={0.3} metalness={0.72} />
+              <meshStandardMaterial color="#1a1a1a" roughness={0.25} metalness={0.85} />
             </mesh>
 
             {Array.from({ length: postCount }, (_, index) => {
@@ -141,7 +141,7 @@ export default function GalleryRoom() {
                   position={[x, RAIL_POST_Y, 0]}
                 >
                   <cylinderGeometry args={[0.04, 0.05, RAIL_POST_HEIGHT, 18]} />
-                  <meshStandardMaterial color="#111111" roughness={0.34} metalness={0.78} />
+                  <meshStandardMaterial color="#1a1a1a" roughness={0.25} metalness={0.85} />
                 </mesh>
               );
             })}

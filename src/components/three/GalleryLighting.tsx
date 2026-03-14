@@ -11,10 +11,23 @@ const pedestalLightPositions: [number, number, number][] = [
   [6.8, 3.5, -15.5],
 ];
 
+const artworkShadowIds = new Set<string>([
+  "render-works",
+  "wrightson-construction",
+  "church-scroll",
+  "answer-studio",
+  "common-estate",
+  "lead-intelligence",
+  "rocks-holloway",
+  "gallery-residency",
+]);
+
 function ArtworkSpotlight({
   artwork,
+  castShadow,
 }: {
   artwork: Project;
+  castShadow: boolean;
 }) {
   const lightRef = useRef<THREE.SpotLight>(null);
   const targetRef = useRef<THREE.Object3D>(null);
@@ -31,13 +44,16 @@ function ArtworkSpotlight({
       <spotLight
         ref={lightRef}
         position={position}
-        intensity={2.4}
+        intensity={3.6}
         angle={Math.PI / 7}
         penumbra={0.6}
         distance={10}
         decay={1.8}
         color="#fff5eb"
-        castShadow={false}
+        castShadow={castShadow}
+        shadow-mapSize-width={512}
+        shadow-mapSize-height={512}
+        shadow-bias={-0.001}
       />
       <object3D ref={targetRef} position={artwork.position} />
       <TrackLight position={position} artwork={artwork} />
@@ -97,17 +113,12 @@ function PedestalSpotlight({
       <spotLight
         ref={lightRef}
         position={position}
-        intensity={2}
+        intensity={1.5}
         angle={Math.PI / 8}
         penumbra={0.5}
         color="#fff5eb"
         distance={6}
         decay={1.7}
-        castShadow
-        shadow-mapSize-width={512}
-        shadow-mapSize-height={512}
-        shadow-bias={-0.001}
-        shadow-normalBias={0.02}
       />
       <object3D ref={targetRef} position={[position[0], 1, position[2]]} />
     </group>
@@ -117,26 +128,14 @@ function PedestalSpotlight({
 export default function GalleryLighting() {
   return (
     <>
-      <ambientLight intensity={0.2} color="#e8e4df" />
-      <directionalLight
-        position={[0, 8, 10]}
-        intensity={0.22}
-        color="#fff5eb"
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-        shadow-bias={-0.0002}
-        shadow-normalBias={0.03}
-        shadow-camera-near={1}
-        shadow-camera-far={30}
-        shadow-camera-left={-18}
-        shadow-camera-right={18}
-        shadow-camera-top={18}
-        shadow-camera-bottom={-18}
-      />
+      <ambientLight intensity={0.18} color="#e8e4df" />
       <Environment preset="studio" environmentIntensity={0.32} />
       {artworkData.map((artwork) => (
-        <ArtworkSpotlight key={artwork.id} artwork={artwork} />
+        <ArtworkSpotlight
+          key={artwork.id}
+          artwork={artwork}
+          castShadow={artworkShadowIds.has(artwork.id)}
+        />
       ))}
       {pedestalLightPositions.map((position) => (
         <PedestalSpotlight
