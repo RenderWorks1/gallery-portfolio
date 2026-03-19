@@ -1,6 +1,6 @@
 "use client";
 
-import { Text, useTexture } from "@react-three/drei";
+import { useTexture } from "@react-three/drei";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useMemo } from "react";
 import { LinearFilter, SRGBColorSpace } from "three";
@@ -17,10 +17,6 @@ const ARTWORK_WIDTH = 2.92;
 const ARTWORK_HEIGHT = 1.76;
 const FRAME_WIDTH = 3.04;
 const FRAME_HEIGHT = 1.88;
-const TITLE_PLAQUE_WIDTH = 2.56;
-const TITLE_PLAQUE_HEIGHT = 0.34;
-const TITLE_PLAQUE_Y = 1.28;
-const TITLE_Y = 1.3;
 const DISPLAY_LIFT = 0.38;
 
 export default function ArtworkFrame({ project }: ArtworkFrameProps) {
@@ -52,12 +48,10 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
             <mesh castShadow receiveShadow position={[0, 0, -0.04]}>
               <boxGeometry args={[FRAME_WIDTH, FRAME_HEIGHT, 0.08]} />
               <meshStandardMaterial
-                color={isNearby ? "#1a1714" : "#0f0f0f"}
-                roughness={0.5}
-                metalness={0.3}
-                envMapIntensity={0.6}
-                emissive={isNearby ? "#3b2f21" : "#1a1511"}
-                emissiveIntensity={isNearby ? 0.12 : 0}
+                color="#000000"
+                roughness={0.4}
+                metalness={0.05}
+                envMapIntensity={0.4}
               />
             </mesh>
 
@@ -70,31 +64,6 @@ export default function ArtworkFrame({ project }: ArtworkFrameProps) {
                 envMapIntensity={0.35}
               />
             </mesh>
-
-            <mesh position={[0, TITLE_PLAQUE_Y, 0.03]} receiveShadow>
-              <boxGeometry args={[TITLE_PLAQUE_WIDTH, TITLE_PLAQUE_HEIGHT, 0.05]} />
-              <meshStandardMaterial
-                color={isNearby ? "#e6caa7" : "#d9bc99"}
-                emissive={isNearby ? "#5e4731" : "#1a1511"}
-                emissiveIntensity={isNearby ? 0.14 : 0}
-                roughness={0.55}
-                metalness={0}
-                envMapIntensity={0.2}
-              />
-            </mesh>
-
-            <Text
-              position={[0, TITLE_Y, 0.065]}
-              color="#1f1710"
-              fontSize={0.15}
-              maxWidth={2.2}
-              outlineWidth={0.005}
-              outlineColor="#fff6ea"
-              anchorX="center"
-              anchorY="middle"
-            >
-              {project.title}
-            </Text>
           </group>
 
           <group position={[markerX, markerY, markerZ]} scale={[0.68, 0.68, 0.68]}>

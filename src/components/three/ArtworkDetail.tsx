@@ -15,15 +15,17 @@ export default function ArtworkDetail({
   return (
     <div className="absolute inset-0 z-50 flex items-center justify-center bg-[rgba(10,10,10,0.62)] p-6 backdrop-blur-md">
       <div className="grid w-full max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-white/12 bg-[#111111] text-white shadow-[0_40px_120px_rgba(0,0,0,0.45)] lg:grid-cols-[1.2fr_1fr]">
-        <div className="border-b border-white/10 bg-[#181818] p-6 lg:border-b-0 lg:border-r">
-          <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0f0f0f]">
-            <Image
-              src={project.screenshotUrl}
-              alt={`${project.title} preview`}
-              width={1200}
-              height={750}
-              className="h-full w-full object-cover"
-            />
+        <div className="flex items-center justify-center border-b border-white/10 bg-[#181818] p-6 lg:border-b-0 lg:border-r">
+          <div className="relative w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0f0f0f] p-3">
+            <div className="relative aspect-[8/5] w-full overflow-hidden rounded-xl">
+              <Image
+                src={project.screenshotUrl}
+                alt={`${project.title} preview`}
+                width={1200}
+                height={750}
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
 
@@ -74,7 +76,7 @@ export default function ArtworkDetail({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-medium uppercase tracking-[0.2em] text-black transition hover:bg-[#e8e4dc]"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-medium uppercase tracking-[0.2em] !text-black transition hover:bg-[#e8e4dc]"
               >
                 Visit site →
               </a>

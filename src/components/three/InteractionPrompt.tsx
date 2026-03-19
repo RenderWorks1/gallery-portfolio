@@ -2,7 +2,15 @@
 
 import { Html } from "@react-three/drei";
 
-export default function InteractionPrompt() {
+interface InteractionPromptProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export default function InteractionPrompt({
+  title = "Step onto the circle",
+  subtitle = "to view",
+}: InteractionPromptProps) {
   return (
     <Html
       center
@@ -12,9 +20,9 @@ export default function InteractionPrompt() {
       position={[0, -1.25, 0.3]}
     >
       <div className="min-w-[220px] rounded-full border border-white/20 bg-[rgba(17,17,17,0.76)] px-6 py-4 text-center text-sm font-medium uppercase tracking-[0.26em] text-white shadow-xl backdrop-blur-md sm:text-base">
-        Step onto the circle
+        {title}
         <br />
-        to view
+        {subtitle}
       </div>
     </Html>
   );

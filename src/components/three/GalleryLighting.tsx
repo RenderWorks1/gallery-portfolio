@@ -4,12 +4,8 @@ import { Environment } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { artworkData, getArtworkLightPosition } from "@/components/three/ArtworkData";
+import { CEILING_HEIGHT } from "@/components/three/galleryConstants";
 import type { Project } from "@/data/projects";
-
-const pedestalLightPositions: [number, number, number][] = [
-  [-2.8, 3.5, 1.6],
-  [3.6, 3.5, -4.9],
-];
 
 const artworkShadowIds = new Set<string>([
   "render-works",
@@ -74,7 +70,7 @@ function TrackLight({
         : 0;
 
   return (
-    <group position={[x, 3.92, z]} rotation={[0.32, fixtureRotationY, 0]}>
+    <group position={[x, CEILING_HEIGHT - 0.08, z]} rotation={[0.32, fixtureRotationY, 0]}>
       <mesh castShadow receiveShadow>
         <boxGeometry args={[0.05, 0.05, 0.6]} />
         <meshStandardMaterial
@@ -101,37 +97,6 @@ function TrackLight({
   );
 }
 
-function PedestalSpotlight({
-  position,
-}: {
-  position: [number, number, number];
-}) {
-  const lightRef = useRef<THREE.SpotLight>(null);
-  const targetRef = useRef<THREE.Object3D>(null);
-
-  useEffect(() => {
-    if (lightRef.current && targetRef.current) {
-      lightRef.current.target = targetRef.current;
-    }
-  }, []);
-
-  return (
-    <group>
-      <spotLight
-        ref={lightRef}
-        position={position}
-        intensity={1.5}
-        angle={Math.PI / 8}
-        penumbra={0.5}
-        color="#fff5eb"
-        distance={6}
-        decay={1.7}
-      />
-      <object3D ref={targetRef} position={[position[0], 1, position[2]]} />
-    </group>
-  );
-}
-
 export default function GalleryLighting() {
   return (
     <>
@@ -142,12 +107,6 @@ export default function GalleryLighting() {
           key={artwork.id}
           artwork={artwork}
           castShadow={artworkShadowIds.has(artwork.id)}
-        />
-      ))}
-      {pedestalLightPositions.map((position) => (
-        <PedestalSpotlight
-          key={`pedestal-light-${position[0]}-${position[2]}`}
-          position={position}
         />
       ))}
     </>

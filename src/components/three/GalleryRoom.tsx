@@ -1,7 +1,10 @@
 "use client";
 
+import { useTexture } from "@react-three/drei";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { RepeatWrapping } from "three";
 import PartitionWall from "@/components/three/PartitionWall";
+import { CEILING_HEIGHT } from "@/components/three/galleryConstants";
 
 type WallSpec = {
   key: string;
@@ -16,19 +19,12 @@ type RailSpec = {
   rotation?: [number, number, number];
 };
 
-type SkirtingSpec = {
-  key: string;
-  position: [number, number, number];
-  width: number;
-  rotation?: [number, number, number];
-};
-
 const perimeterWalls: WallSpec[] = [
-  { key: "left-wall", position: [-9, 2, 0], size: [0.3, 4, 24] },
-  { key: "right-wall", position: [9, 2, 0], size: [0.3, 4, 24] },
-  { key: "back-wall", position: [0, 2, -12], size: [18, 4, 0.3] },
-  { key: "front-left-wing", position: [-6.5, 2, 12], size: [5, 4, 0.3] },
-  { key: "front-right-wing", position: [6.5, 2, 12], size: [5, 4, 0.3] },
+  { key: "left-wall", position: [-9, CEILING_HEIGHT / 2, 0], size: [0.3, CEILING_HEIGHT, 24] },
+  { key: "right-wall", position: [9, CEILING_HEIGHT / 2, 0], size: [0.3, CEILING_HEIGHT, 24] },
+  { key: "back-wall", position: [0, CEILING_HEIGHT / 2, -12], size: [18, CEILING_HEIGHT, 0.3] },
+  { key: "front-left-wing", position: [-6.5, CEILING_HEIGHT / 2, 12], size: [5, CEILING_HEIGHT, 0.3] },
+  { key: "front-right-wing", position: [6.5, CEILING_HEIGHT / 2, 12], size: [5, CEILING_HEIGHT, 0.3] },
 ];
 
 const partitions: WallSpec[] = [
@@ -36,8 +32,8 @@ const partitions: WallSpec[] = [
 ];
 
 const railSegments: RailSpec[] = [
-  { key: "rail-left", position: [-7.7, 0, 0], length: 22.6, rotation: [0, Math.PI / 2, 0] },
-  { key: "rail-right", position: [7.7, 0, 0], length: 22.6, rotation: [0, Math.PI / 2, 0] },
+  { key: "rail-left", position: [-7.7, 0, 0], length: 21.4, rotation: [0, Math.PI / 2, 0] },
+  { key: "rail-right", position: [7.7, 0, 0], length: 21.4, rotation: [0, Math.PI / 2, 0] },
   { key: "rail-back", position: [0, 0, -10.7], length: 15.4 },
   { key: "rail-front-left", position: [-5.8, 0, 10.7], length: 3.8 },
   { key: "rail-front-right", position: [5.8, 0, 10.7], length: 3.8 },
@@ -53,37 +49,44 @@ const RAIL_COLLIDER_Y = 0.42;
 const RAIL_COLLIDER_DEPTH = 0.08;
 const ENTRANCE_Z = 11.82;
 
-const wallMaterial = {
-  color: "#f2efe8",
-  roughness: 0.95,
-  metalness: 0,
-  envMapIntensity: 0.05,
-};
+function Floor() {
+  const texture = useTexture("/textures/painted_concrete.jpg");
+  texture.wrapS = texture.wrapT = RepeatWrapping;
+  texture.repeat.set(6, 8);
 
-const accentWallMaterial = {
-  color: "#2a2825",
-  roughness: 0.88,
-  metalness: 0,
-  envMapIntensity: 0.15,
-};
-
-const skirtingSpecs: SkirtingSpec[] = [
-  { key: "skirting-left-wall", position: [-8.84, 0.05, 0], width: 24, rotation: [0, Math.PI / 2, 0] },
-  { key: "skirting-right-wall", position: [8.84, 0.05, 0], width: 24, rotation: [0, Math.PI / 2, 0] },
-  { key: "skirting-back-wall", position: [0, 0.05, -11.84], width: 18 },
-  { key: "skirting-front-left-wing", position: [-6.5, 0.05, 11.84], width: 5 },
-  { key: "skirting-front-right-wing", position: [6.5, 0.05, 11.84], width: 5 },
-];
-
-function Skirting({ position, width, rotation = [0, 0, 0] }: Omit<SkirtingSpec, "key">) {
   return (
-    <mesh position={position} rotation={rotation} receiveShadow>
-      <boxGeometry args={[width, 0.1, 0.02]} />
+    <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+      <planeGeometry args={[18, 24]} />
       <meshStandardMaterial
-        color="#d5d0c6"
-        roughness={0.7}
+        map={texture}
+        roughness={0.65}
+        metalness={0.02}
+        envMapIntensity={0.5}
+      />
+    </mesh>
+  );
+}
+
+function WallMesh({
+  position,
+  args,
+}: {
+  position: [number, number, number];
+  args: [number, number, number];
+}) {
+  const texture = useTexture("/textures/white_plaster.jpg");
+  texture.wrapS = texture.wrapT = RepeatWrapping;
+  texture.repeat.set(4, args[1] / 2);
+
+  return (
+    <mesh position={position} castShadow receiveShadow>
+      <boxGeometry args={args} />
+      <meshStandardMaterial
+        map={texture}
+        color="#ffffff"
+        roughness={0.95}
         metalness={0}
-        envMapIntensity={0.1}
+        envMapIntensity={0.05}
       />
     </mesh>
   );
@@ -94,18 +97,10 @@ export default function GalleryRoom() {
     <group>
       <RigidBody type="fixed" colliders={false}>
         <CuboidCollider args={[9, 0.1, 12]} position={[0, -0.1, 0]} />
-        <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-          <planeGeometry args={[18, 24]} />
-          <meshStandardMaterial
-            color="#c8c2b8"
-            roughness={0.12}
-            metalness={0.02}
-            envMapIntensity={1}
-          />
-        </mesh>
+        <Floor />
       </RigidBody>
 
-      <mesh position={[0, 4.03, 0]} rotation={[Math.PI / 2, 0, 0]} receiveShadow>
+      <mesh position={[0, CEILING_HEIGHT + 0.03, 0]} rotation={[Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[18, 24]} />
         <meshStandardMaterial
           color="#f5f2ec"
@@ -122,7 +117,7 @@ export default function GalleryRoom() {
       ].map((channel) => (
         <mesh
           key={channel.key}
-          position={[channel.x, 3.985, 0]}
+          position={[channel.x, CEILING_HEIGHT - 0.045, 0]}
           castShadow
           receiveShadow
         >
@@ -138,20 +133,8 @@ export default function GalleryRoom() {
 
       {perimeterWalls.map((wall) => (
         <RigidBody key={wall.key} type="fixed">
-          <mesh position={wall.position} castShadow receiveShadow>
-            <boxGeometry args={wall.size} />
-            <meshStandardMaterial {...(wall.key === "back-wall" ? accentWallMaterial : wallMaterial)} />
-          </mesh>
+          <WallMesh position={wall.position} args={wall.size} />
         </RigidBody>
-      ))}
-
-      {skirtingSpecs.map((skirting) => (
-        <Skirting
-          key={skirting.key}
-          position={skirting.position}
-          width={skirting.width}
-          rotation={skirting.rotation}
-        />
       ))}
 
       {partitions.map((wall) => (
@@ -220,7 +203,7 @@ export default function GalleryRoom() {
         );
       })}
 
-      <group position={[0, 0, ENTRANCE_Z]}>
+      <group position={[0, 0, ENTRANCE_Z]} rotation={[0, Math.PI, 0]}>
         <mesh castShadow receiveShadow position={[0, 2.05, -0.12]}>
           <boxGeometry args={[3.8, 4.1, 0.16]} />
           <meshStandardMaterial color="#1a1a1a" roughness={0.38} metalness={0.82} envMapIntensity={0.9} />
@@ -276,11 +259,6 @@ export default function GalleryRoom() {
           <meshStandardMaterial color="#1c1c1c" roughness={0.2} metalness={0.92} envMapIntensity={1.2} />
         </mesh>
       </group>
-
-      <mesh position={[0, 0.01, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <ringGeometry args={[1.4, 2, 64]} />
-        <meshStandardMaterial color="#8a6d4e" roughness={0.6} metalness={0} envMapIntensity={0.2} />
-      </mesh>
     </group>
   );
 }

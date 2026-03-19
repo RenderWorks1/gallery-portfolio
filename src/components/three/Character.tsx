@@ -92,12 +92,12 @@ function CameraAssist({
 
 export default function Character({ controlsDisabled }: CharacterProps) {
   const controllerRef = useRef<CustomEcctrlRigidBody | null>(null);
-  const activeProjectId = useGalleryStore((state) => state.activeProject);
+  const isOverlayOpen = useGalleryStore((state) => state.isOverlayOpen);
 
   useEffect(() => {
     const rigidBody = controllerRef.current?.group;
 
-    if (!activeProjectId || !rigidBody) {
+    if (!isOverlayOpen || !rigidBody) {
       return;
     }
 
@@ -105,7 +105,7 @@ export default function Character({ controlsDisabled }: CharacterProps) {
     // force the character to snap to a marker position or rotate.
     rigidBody.setLinvel({ x: 0, y: 0, z: 0 }, true);
     rigidBody.setAngvel({ x: 0, y: 0, z: 0 }, true);
-  }, [activeProjectId]);
+  }, [isOverlayOpen]);
 
   return (
     <Ecctrl
@@ -113,6 +113,7 @@ export default function Character({ controlsDisabled }: CharacterProps) {
       name="player"
       animated
       position={[0, 1.25, 8.6]}
+      characterInitDir={Math.PI}
       mode="FixedCamera"
       capsuleHalfHeight={0.35}
       capsuleRadius={0.3}
@@ -122,8 +123,8 @@ export default function Character({ controlsDisabled }: CharacterProps) {
       camInitDis={-4.6}
       camMaxDis={-6.6}
       camMinDis={-2.4}
-      camTargetPos={{ x: 0, y: 0.45, z: 0 }}
-      camInitDir={{ x: 0.42, y: 0 }}
+      camTargetPos={{ x: 0, y: 0.25, z: 0 }}
+      camInitDir={{ x: 0.32, y: Math.PI }}
       camUpLimit={1.15}
       camLowLimit={-0.15}
       camFollowMult={3}

@@ -1,5 +1,6 @@
 import { projects, type Project } from "@/data/projects";
 import { Euler, Vector3 } from "three";
+import { CEILING_HEIGHT } from "@/components/three/galleryConstants";
 
 export const artworkData: Project[] = projects;
 export const artworkMarkerLocalOffset: [number, number, number] = [0, -1.53, 2.2];
@@ -17,8 +18,8 @@ export function getArtworkMarkerPosition(project: Project): [number, number, num
 }
 
 export function getArtworkLightPosition(project: Project): [number, number, number] {
-  const [x, y, z] = project.position;
-  const lightHeight = y + 3;
+  const [x, , z] = project.position;
+  const lightHeight = CEILING_HEIGHT - 0.5;
 
   switch (project.wall) {
     case "left":

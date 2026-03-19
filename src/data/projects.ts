@@ -22,7 +22,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "Property", "CMS"],
     year: "2025",
     wall: "left",
-    position: [-8.35, 1.55, 5.8],
+    position: [-8.35, 1.8, 5.8],
     rotation: [0, Math.PI / 2, 0],
   },
   {
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     tags: ["Branding", "Tailwind", "Motion"],
     year: "2025",
     wall: "left",
-    position: [-8.35, 1.55, -0.5],
+    position: [-8.35, 1.8, -0.5],
     rotation: [0, Math.PI / 2, 0],
   },
   {
@@ -43,12 +43,12 @@ export const projects: Project[] = [
     title: "Church Scroll Hero",
     description:
       "An immersive landing experience built around editorial pacing, fluid motion, and a carefully art-directed visual hierarchy.",
-    screenshotUrl: "/screenshots/project-03.svg",
+    screenshotUrl: "/screenshots/church-scroll.png",
     liveUrl: "https://example.com/church-scroll",
     tags: ["React", "Animation", "Storytelling"],
     year: "2026",
     wall: "left",
-    position: [-8.35, 1.55, -6.6],
+    position: [-8.35, 1.8, -6.6],
     rotation: [0, Math.PI / 2, 0],
   },
   {
@@ -56,13 +56,13 @@ export const projects: Project[] = [
     title: "Dunstan Common",
     description:
       "A real-estate style experience designed to feel cinematic, spatially generous, and easy to navigate across dense information.",
-    screenshotUrl: "/screenshots/project-05.svg",
+    screenshotUrl: "/screenshots/dunstan-common.png",
     liveUrl: "https://example.com/dunstan-common",
     tags: ["Next.js", "Real Estate", "Design System"],
     year: "2025",
     wall: "center-partition",
-    position: [2, 1.55, -1.6],
-    rotation: [0, -Math.PI / 2, 0],
+    position: [0.2, 1.8, -1.6],
+    rotation: [0, Math.PI / 2, 0],
   },
   {
     id: "rocks-holloway",
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     tags: ["Hospitality", "Editorial", "Visual Design"],
     year: "2025",
     wall: "back",
-    position: [0, 1.55, -11.35],
+    position: [0, 1.8, -11.35],
     rotation: [0, 0, 0],
   },
 ];

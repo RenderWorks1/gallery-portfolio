@@ -36,15 +36,15 @@ export default function CharacterModel() {
         return;
       }
 
-      const applyBlackMaterial = (material: THREE.Material) => {
+      const applyWhiteMaterial = (material: THREE.Material) => {
         const nextMaterial = material.clone();
 
         if ("color" in nextMaterial && nextMaterial.color instanceof THREE.Color) {
-          nextMaterial.color = new THREE.Color("#050505");
+          nextMaterial.color = new THREE.Color("#f5f5f0");
         }
 
         if ("emissive" in nextMaterial && nextMaterial.emissive instanceof THREE.Color) {
-          nextMaterial.emissive = new THREE.Color("#1a1511");
+          nextMaterial.emissive = new THREE.Color("#e8e6e0");
         }
 
         if ("emissiveIntensity" in nextMaterial && typeof nextMaterial.emissiveIntensity === "number") {
@@ -55,8 +55,8 @@ export default function CharacterModel() {
       };
 
       child.material = Array.isArray(child.material)
-        ? child.material.map(applyBlackMaterial)
-        : applyBlackMaterial(child.material);
+        ? child.material.map(applyWhiteMaterial)
+        : applyWhiteMaterial(child.material);
       child.castShadow = true;
       child.receiveShadow = true;
     });

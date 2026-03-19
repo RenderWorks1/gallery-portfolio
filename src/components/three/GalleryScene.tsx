@@ -14,16 +14,15 @@ import { Physics } from "@react-three/rapier";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
 import ArtworkDetail from "@/components/three/ArtworkDetail";
+import EnquiryDesk from "@/components/three/EnquiryDesk";
 import ArtworkFrame from "@/components/three/ArtworkFrame";
 import Character from "@/components/three/Character";
 import GalleryBench from "@/components/three/GalleryBench";
 import GalleryLighting from "@/components/three/GalleryLighting";
-import GalleryPlant from "@/components/three/GalleryPlant";
 import GalleryRoom from "@/components/three/GalleryRoom";
-import Pedestal from "@/components/three/Pedestal";
-import WelcomeSign from "@/components/three/WelcomeSign";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import ControlsHint from "@/components/ui/ControlsHint";
+import EnquiryDetail from "@/components/ui/EnquiryDetail";
 import TutorialCard from "@/components/ui/TutorialCard";
 import { projects } from "@/data/projects";
 import { useGalleryStore } from "@/stores/galleryStore";
@@ -34,36 +33,6 @@ const benchPlacements: Array<{
 }> = [
   { position: [-4.8, 0, 5.4], rotation: [0, Math.PI / 2, 0] },
   { position: [4.8, 0, -6.2], rotation: [0, -Math.PI / 2, 0] },
-];
-
-const pedestalPlacements: Array<{
-  position: [number, number, number];
-  objectType: "icosahedron" | "torus" | "torusKnot" | "octahedron" | "dodecahedron";
-  objectColor: string;
-  label: string;
-}> = [
-  {
-    position: [-2.8, 0, 1.6],
-    objectType: "torusKnot",
-    objectColor: "#1d9e75",
-    label: "Three.js",
-  },
-  {
-    position: [3.6, 0, -4.9],
-    objectType: "dodecahedron",
-    objectColor: "#534ab7",
-    label: "Next.js",
-  },
-];
-
-const plantPlacements: Array<{
-  position: [number, number, number];
-  scale: number;
-}> = [
-  { position: [-3.8, 0, 9.2], scale: 1 },
-  { position: [3.8, 0, 9.2], scale: 0.92 },
-  { position: [-6.9, 0, -9.4], scale: 1.12 },
-  { position: [6.8, 0, 4.7], scale: 0.88 },
 ];
 
 const keyboardMap = [
@@ -81,8 +50,10 @@ projects.forEach((project) => useTexture.preload(project.screenshotUrl));
 export default function GalleryScene() {
   const activeProjectId = useGalleryStore((state) => state.activeProject);
   const nearbyProject = useGalleryStore((state) => state.nearbyProject);
+  const isEnquiryOpen = useGalleryStore((state) => state.isEnquiryOpen);
   const isOverlayOpen = useGalleryStore((state) => state.isOverlayOpen);
   const setActiveProject = useGalleryStore((state) => state.setActiveProject);
+  const setIsEnquiryOpen = useGalleryStore((state) => state.setIsEnquiryOpen);
   const setIsLoaded = useGalleryStore((state) => state.setIsLoaded);
 
   const [hasEntered, setHasEntered] = useState(false);
@@ -110,7 +81,14 @@ export default function GalleryScene() {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.code === "Escape") {
-        setActiveProject(null);
+        if (activeProjectId) {
+          setActiveProject(null);
+          return;
+        }
+
+        if (isEnquiryOpen) {
+          setIsEnquiryOpen(false);
+        }
         return;
       }
 
@@ -127,7 +105,15 @@ export default function GalleryScene() {
     window.addEventListener("keydown", onKeyDown);
 
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [hasEntered, isOverlayOpen, nearbyProject, setActiveProject]);
+  }, [
+    activeProjectId,
+    hasEntered,
+    isEnquiryOpen,
+    isOverlayOpen,
+    nearbyProject,
+    setActiveProject,
+    setIsEnquiryOpen,
+  ]);
 
   return (
     <div
@@ -182,24 +168,7 @@ export default function GalleryScene() {
                   rotation={bench.rotation}
                 />
               ))}
-              {pedestalPlacements.map((pedestal) => (
-                <Pedestal
-                  key={pedestal.label}
-                  position={pedestal.position}
-                  objectType={pedestal.objectType}
-                  objectColor={pedestal.objectColor}
-                  label={pedestal.label}
-                />
-              ))}
-              {plantPlacements.map((plant, index) => (
-                <GalleryPlant key={`plant-${index}`} position={plant.position} scale={plant.scale} />
-              ))}
-              <WelcomeSign
-                position={[-2.8, 0, 8.3]}
-                rotation={[0, 0.28, 0]}
-                title="Luke's Portfolio"
-                subtitle="Web Development & Design"
-              />
+              <EnquiryDesk />
               <Character controlsDisabled={isOverlayOpen || !hasEntered} />
               {projects.map((project) => (
                 <ArtworkFrame key={project.id} project={project} />
@@ -226,6 +195,9 @@ export default function GalleryScene() {
           project={activeProject}
           onClose={() => setActiveProject(null)}
         />
+      ) : null}
+      {isEnquiryOpen ? (
+        <EnquiryDetail onClose={() => setIsEnquiryOpen(false)} />
       ) : null}
     </div>
   );
